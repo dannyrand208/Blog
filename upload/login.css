@@ -1,0 +1,120 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    width: 100%;
+    position: relative;
+    font-family: 'poppins', sans-serif;
+    background-image: url('https://wallpapercave.com/wp/wp9212784.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+}
+
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+
+h2 {
+    color: #333;
+    font-size: 90px;
+    margin-top: -30px;
+}
+
+form {
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 130px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+label {
+    margin: 10px 0;
+    color: #333;
+    font-size: 25px;
+}
+
+
+input {
+    width: 450px;
+    padding: 20px ;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+
+.submit {
+    background-color: orange;
+    color: #fff;
+    padding: 18px 80px;
+    border: 5px black;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.submit:hover {
+    background-color: #45a049;
+}
+.register {
+    background-color: orange;
+    color: #fff;
+    padding: 18px 60px;
+    border: 5px black;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.register:hover {
+    background-color: #45a049;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+p {
+    font-size: 25px;
+    margin-top: 0px;
+    color: #333;
+}
+
+
+.back {
+    text-decoration: none;
+    font-size: 25px;
+    margin-bottom: -20px;
+}
+
