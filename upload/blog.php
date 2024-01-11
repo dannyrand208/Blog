@@ -1,4 +1,9 @@
 
+<?php // <--- do NOT put anything before this PHP tag
+	include('Functions.php');
+	$cookieMessage = getCookieMessage();
+	$cookieUser = getCookieUser()
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +15,29 @@
 
 <body>
     <nav class="navbar">
-        <img class="logo" src="https://seeklogo.com/images/B/blogger_B-logo-47610B2F87-seeklogo.com.png" alt="ok">
+       
+        <a class="logo" href="home.php">
+            <img class="logo-img" src="https://seeklogo.com/images/B/blogger_B-logo-47610B2F87-seeklogo.com.png" alt="ok">
+        </a>
         <ul class="link-container">
             <li class="link-item"><a href="home.php" class="link">Home</a>
-            <li class="link-item"><a href="/myprogram/upload/editor.php" class="link">Editor</a></li>
-            <li class="link-item"><a href="/myprogram/upload/login.php" class="link">Login</a></li>    
+            <?php 
+		if (empty($cookieUser)) {
+			// User is not logged in, display Sign Up and Sign In links.
+			echo '<li class="link-item"><a href="/myprogram/upload/login.php" class="link">Login</a></li>';
+            
+		} else {
+			// User is logged in, display Sign Out and user information.
+            echo '<li class="link-item"><a href="adminpages.php" class="link">Admin</a></li>';
+            echo '<div class="dropdown" id="userDropdown">
+            <a class="dropbtn">' . $cookieUser . ' &#9662;</a>
+            <div class="dropdown-content" id="dropdownContent">
+                <a href="logoutUser.php">Logout</a>
+            </div>
+          </div>'; 
+}
+            
+		?>
         
         </ul>
     </nav>

@@ -4,4 +4,5 @@
 	deleteCookie('CookieUser');
 	redirect('home.php');
 	
+	
 ?>

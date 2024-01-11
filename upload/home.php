@@ -22,14 +22,14 @@
         <ul class="link-container">
             <li class="link-item"><a href="home.php" class="link">Home</a>
             <li class="link-item"><a href="blog.php" class="link">Blog</a>
-            <li class="link-item"><a href="/myprogram/upload/editor.php" class="link">Editor</a></li>
+
             <?php 
 		if (empty($cookieUser)) {
-			// User is not logged in, display Sign Up and Sign In links.
+			
 			echo '<li class="link-item"><a href="/myprogram/upload/login.php" class="link">Login</a></li>';
             
 		} else {
-			// User is logged in, display Sign Out and user information.
+            echo '<li class="link-item"><a href="adminpages.php" class="link">Admin</a></li>';
             echo '<div class="dropdown" id="userDropdown">
             <a class="dropbtn">' . $cookieUser . ' &#9662;</a>
             <div class="dropdown-content" id="dropdownContent">
@@ -51,7 +51,7 @@
           <h1 class="heading">
 
         <?php
-
+    
         if (empty($cookieUser)) {
     
             echo'<span class="small">
@@ -60,7 +60,7 @@
             blog
             <span class="no-fill">writing</span>
             </h1>  
-            <button class="btn1"> <a href="editor.php" class="btn">Write a blog</a></button>
+            <button class="btn1"> <a href="login.php" class="btn">Write a blog</a></button>
             </div>';
             
         } else {
@@ -123,6 +123,7 @@
                 }
             }
         });
+
     });
 
     </script>

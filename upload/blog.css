@@ -44,3 +44,9 @@
     font-size: 40px;
     margin-top: 80px;
 }
+
+.logo img {
+    width: 30%;
+    height: auto;
+
+}

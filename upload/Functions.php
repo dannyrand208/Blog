@@ -69,7 +69,7 @@ function deleteCookie($cookieName)
 {
 	// to delete a cookie, you set the expiry date to a date in the past.
 	// in this case set the expiry date to 1 second past midnight 1st of Jan 1970
-	setcookie($cookieName,"",1);
+	setcookie($cookieName,"",-1);
 }
 
 // run this function on untrusted data before we echo it on the page.
