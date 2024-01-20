@@ -41,6 +41,22 @@ function setCookieUser($cookieUser)
 	setcookie("CookieUser", $cookieUser);
 }
 
+
+function setCookieTheme($theme)
+{
+    setcookie("theme", $theme); // Set the cookie with an expiration time of 1 hour
+}
+
+function getCookieTheme()
+{
+    if (isset($_COOKIE['Color'])) {
+        $color = $_COOKIE['Color'];
+        return makeOutputSafe($color);
+    } else {
+        return ""; // Return an empty string or a default value as needed
+    }
+}
+
 // please note that this function MUST be called before any HTML is displayed on the page or it wont work.
 function getCookieMessage()
 {
@@ -79,4 +95,22 @@ function makeOutputSafe($unsafeString)
 	return $safeOutput;
 }	
 
+function getUserTheme() {
+    
+	return isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
+}
+
+function isDarkMode() {
+    $theme = getCookieTheme();
+    return $theme == "dark";
+}
+
+if (isset($_POST['action']) && $_POST['action'] == 'setTheme') {
+    // Handle AJAX request to set theme
+    $theme = $_POST['theme'];
+    setCookieTheme($theme);
+    echo json_encode(['success' => true]);
+    exit;
+}
 ?>
+

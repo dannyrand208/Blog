@@ -32,11 +32,9 @@
 
     <div class="blog-options">
         <button class="btn dark publish-btn">publish</button>
-        <input type="submit" value="Upload" id="image-upload" hidden>
+        <input type="submit" name="my_image" value="Upload" id="image-upload" hidden>
         <label for="image-upload" class="btn grey upload-btn">Upload Image</label>
     </div>
-
-    <script src="js/editor.js"></script>
    
 </body>
 </html>

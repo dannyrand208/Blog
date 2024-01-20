@@ -13,8 +13,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog: Homepage</title>
-    <link rel="stylesheet" href="adminpages.css">
+
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="adminpages1.css">
 </head>
         
 <body>
@@ -28,6 +29,8 @@
     <li class="link-item"><a href="home.php" class="link">Home</a></li>
 
     <div id="user_info">
+
+    
 </div>
     <?php 
     if (empty($cookieUser)) {
@@ -47,22 +50,84 @@
 
     </div>
 
-   
-    <div class="sidebar">
+ <div class=admin-wrapper>
+    
+        <div class="sidebar">
+        <!-- Left Sidebar -->
         <header>Manage </header>  
         <ul >
-            <li> <a  href="admin_manage_posts.php"><i class="fas fa-qrcode">Manage Post</a></li>
-            <li> <a  href="admin_manage_users.php"><i class="fas fa-qrcode">Manage Users</a></li>
-            <li> <a  href="admin_manage_topics.php"><i class="fas fa-qrcode">Manage Topics</a></li>
-            <li> <a  href="about.php"><i class="fas fa-qrcode">About</a></li>
-        </ul>
-           
-         
-            
+            <li> <a  href="managepost.php">Manage Post</a></li>
+            <li> <a  href="manageuser.php">Manage Users</a></li>
+            <li> <a  href="managetopic.php">Manage Topics</a></li>
+            <li> <a  href="about.php">About</a></li>
+        </ul>    
         </div>
 
 
+        <div class="admin-content">
+            <div class="button-group">
+                <a href="adminpages.php" class="btn btn-big">Add Topic</a>
+                <a href="managetopic.php" class="btn btn-big">Manage Topic</a>
+        </div>
 
+        <div class="content">
+            <h2 class="page-title"> Add topic</h2>
+            <form action="adminpages.php" method="POST">
+            <div class="form-item">
+                <label>Topic Name</label>
+                <textarea name="text-input" id="text-input" cols="5" rows="5"></textarea>
+            </div>
+            <div class="form-item" style="margin-top: 10px">
+                <label for="">Description</label>
+                <textarea name="text-input2" id="text-input2" cols="10" rows="40"></textarea>
+            </div>
+                <label for="">Image</label>
+                <input type="file" name="inmga">
+            <div>
+            
+            <div>
+                <button type="submit" class="btn btn-big">Add Topic </button>
+            </div>
+                
+            </label>
+            </div>
+            </form>
+
+
+        </div>
+
+            
+    </div>
+
+    <div class="button">
+
+
+
+</div>
+    <script src="./common/common.js"></script>
+    <script src="./admin/adminpages.js"></script>
+    <!-- <script>
+        // JavaScript for handling the asynchronous form submission
+        function addTopic() {
+            var topicName = document.getElementById('topicName').value;
+            var topicDescription = document.getElementById('topicDescription').value;
+
+            // You can perform additional validation here
+
+            // Using AJAX to send the form data to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'add_topic.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Handle the response from the server, if needed
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send('topicName=' + encodeURIComponent(topicName) + '&topicDescription=' + encodeURIComponent(topicDescription));
+        }
+    </script>
+ -->
 
     
  

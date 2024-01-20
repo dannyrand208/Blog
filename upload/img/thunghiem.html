@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto-Moving Card Slider</title>
+  <style>
+    .slider-container {
+      width: 80%;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .card {
+      width: 300px;
+      margin: 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="slider-container">
+  <div class="slider" id="slider">
+    <div class="card">Card 1</div>
+    <div class="card">Card 2</div>
+    <div class="card">Card 3</div>
+    <!-- Add more cards as needed -->
+  </div>
+</div>
+
+<script>
+  const slider = document.getElementById('slider');
+
+  function moveSlider() {
+    // Adjust the value (300) based on the width of your cards
+    const cardWidth = 300;
+    slider.style.transition = 'transform 0.5s ease-in-out';
+    slider.style.transform = `translateX(${-cardWidth}px)`;
+
+    setTimeout(() => {
+      const firstCard = slider.children[0];
+      slider.style.transition = 'none';
+      slider.appendChild(firstCard);
+      slider.style.transform = 'translateX(0)';
+    }, 500);
+  }
+
+  // Adjust the interval (3000) based on your desired auto-move time
+  setInterval(moveSlider, 3000);
+</script>
+
+</body>
+</html>

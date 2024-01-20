@@ -7,6 +7,7 @@ try {
     $email = $_POST['email'];
     $passWord = $_POST['password'];
     $passWord2 = $_POST['password1'];
+    $role = 'User';
 
     $dbh = connectToDatabase();
 
@@ -21,11 +22,12 @@ try {
     }
 
     // Insert the new user
-    $statement2 = $dbh->prepare('INSERT INTO User (UserName, Email, Password, Password2) VALUES (?, ?, ?, ?)');
+    $statement2 = $dbh->prepare('INSERT INTO User (UserName, Email, Password, Password2,Role) VALUES (?, ?, ?, ?,?)');
     $statement2->bindValue(1, $userName);
     $statement2->bindValue(2, $email);
     $statement2->bindValue(3, $passWord);
     $statement2->bindValue(4, $passWord2);
+    $statement2->bindValue(5, $role);
     $statement2->execute();
 
     echo "<script>alert('The sername has been added. Please sign in to start posting.'U);</script>";
