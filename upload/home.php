@@ -33,7 +33,8 @@ $themeConfig = getCookieTheme();
 
         <ul class="link-container">
             <li class="link-item"><a href="home.php" class="link">Home</a>
-            <li class="link-item"><a href="blog.php" class="link">Blog</a>
+            <li class="link-item"><a href="topic.php" class="link">Topic</a>
+            <li class="link-item"><a href="blog.php" class="link">All Blog</a>
 
                 <?php
                 if (empty($cookieUser)) {
@@ -98,7 +99,7 @@ $themeConfig = getCookieTheme();
     </header>
 
     <section class="blog-section">
-
+     <p style="text-align:center; font-size: 55px;"> Trending Post</p>
 
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">

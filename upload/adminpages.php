@@ -72,21 +72,24 @@
 
         <div class="content">
             <h2 class="page-title"> Add topic</h2>
-            <form action="adminpages.php" method="POST">
+          <?php
+				        echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
+		        ?>
+            <form action="addtopic_backend.php" method="POST">
             <div class="form-item">
                 <label>Topic Name</label>
-                <textarea name="text-input" id="text-input" cols="5" rows="5"></textarea>
+                <textarea name="topic" id="topic" cols="5" rows="5"></textarea>
             </div>
             <div class="form-item" style="margin-top: 10px">
                 <label for="">Description</label>
-                <textarea name="text-input2" id="text-input2" cols="10" rows="40"></textarea>
+                <textarea name="description" id="description" cols="10" rows="40"></textarea>
             </div>
                 <label for="">Image</label>
-                <input type="file" name="inmga">
+                <input type="file" name="image" id="image">
             <div>
             
             <div>
-                <button type="submit" class="btn btn-big">Add Topic </button>
+                <button type="submit" class="btn btn-big">Add Topic</button>
             </div>
                 
             </label>

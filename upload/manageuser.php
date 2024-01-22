@@ -31,7 +31,7 @@
 <body>
     <div class="navbar">
        
-       <a class="logo" href="home.php">
+       <a class="logo" href="manageuser.php">
            <img class="logo-img" src="https://seeklogo.com/images/B/blogger_B-logo-47610B2F87-seeklogo.com.png" alt="ok">
        </a>
          
@@ -84,7 +84,9 @@
            
             <h2 class="page-title"> Manage User</h2>
 
- 
+            <?php
+				        echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
+		        ?>
          <table>
             <thead>
                 <th>Username</th>
@@ -94,15 +96,6 @@
                 <th colspan='2'>Action</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>Lamcoder</td>
-                    <td>123455</td>
-                    <td>lam123@gmail.com</td>
-                    <td>User</td>
-                    <td><a class='edit' href='managepostback.php'>Edit</a></td>
-                    <td><a class='delete' href='mangepostback.php'>Delete</a></td>
-                </tr>
-
                 <?php
                         foreach ($data as $row) {
                             echo "<tr>";
@@ -110,8 +103,8 @@
                             echo "<td>" . $row['password'] . "</td>";
                             echo "<td>" . $row['email'] . "</td>";
                             echo "<td>" . $row['Role'] . "</td>";
-                            echo "<td><a class='edit' href='managepostback.php'>Edit</a></td>";
-                            echo "<td><a class='delete' href='mangepostback.php'>Delete</a></td>";
+                            echo "<td><a class='edit' href='edit_user.php?user_id=" . $row['UserID'] . "'>Edit</a></td>";
+                            echo "<td><a class='delete' href='deleteuser.php?user_id=" . $row['UserID'] . "'>Delete</a></td>";
                             echo "</tr>";
                         }
                     ?>

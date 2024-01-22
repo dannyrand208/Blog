@@ -49,7 +49,6 @@ $cookieUser = getCookieUser();
         </a>
         <ul class="link-container">
             <li class="link-item"><a href="home.php" class="link">Home</a></li>
-            <li class="link-item"><a href="topic.php" class="link">Topic</a></li>
             <?php
             if (empty($cookieUser)) {
                 // User is not logged in, display Sign Up and Sign In links.
@@ -77,29 +76,16 @@ $cookieUser = getCookieUser();
     <p>Search</p>
 
 
-
-
-    <?php  
-    if(empty($cookieUser)) {
-    echo' <header class="header">
+    <header class="header">
         <div class="content">
             <h1 class="heading">
                 Do you know that human write and publish around 7.5 million blog on the internet per day
                 <br><span class="no-fill">Want to wirte a blog?</span>
             </h1>
             <button class="btn1"> <a href="login.php" class="btn">Login to write a blog</a></button>
-        </div>';
-    }else {
-        echo ' 
-        <header class="header">
-        <div class="content">
-            <h1 class="heading">
-                Do you know that human write and publish around 7.5 million blog on the internet per day
-                <br><button class="btn1"> <a href="editor.php" class="btn">Write a blog</a></button>
-            </h1>
-        </div>';
-    }
-?>
+        </div>
+
+
 
 
     </header>
@@ -123,7 +109,6 @@ $cookieUser = getCookieUser();
                 echo '<img class="blog-image" src="img/' . $row['Image_url'] . '" alt="">';
                 echo '<h1 class="blog-title">' . $row['Title'] . '</h1>';
                 echo '<p class="blog-overview">' . $row['Shortdescription'] . '</p>';
-                echo '<p class="blog-overview" style="color:blue; font-weight:bold">Topic: ' . $row['Topic'] . '</p>';
 
                 echo '<p class="post-date" id="postDate"><i class="far fa-calendar-alt"></i> ' . $row['currentTime'] . '</p>';
 
@@ -137,8 +122,6 @@ $cookieUser = getCookieUser();
                     echo '<img class="blog-image" src="img/' . $row['Image_url'] . '" alt="">';
                     echo '<h1 class="blog-title">' . $row['Title'] . '</h1>';
                     echo '<p class="blog-overview">' . $row['Shortdescription'] . '</p>';
-                    echo '<p class="blog-overview">' . $row['Topic'] . '</p>';
-
 
                     echo '<p class="post-date" id="postDate"><i class="far fa-calendar-alt"></i> ' . $row['currentTime'] . '</p>';
 

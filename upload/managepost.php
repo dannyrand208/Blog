@@ -6,6 +6,9 @@
     $statement = $dbh -> prepare('SELECT * FROM Post');
     $statement -> execute();
 
+
+    
+
     $data = array();
     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         $data[] = $row;
@@ -92,7 +95,6 @@
                 <th colspan='3'>Action</th>
             </thead>
             <tbody>
-                
                 <?php
                         foreach ($data as $row) {
                             echo "<tr>";
@@ -100,7 +102,7 @@
                             echo "<td>" . $row['Title'] . "</td>";
                             echo "<td>" . $cookieUser . "</td>";
                             echo "<td>" . $row['Topic'] . "</td>";
-                            echo "<td><a class='edit' href='managepostback.php'>Edit</a></td>";
+                            echo "<td><a class='edit' href='edit_post.php?post_id=" . $row['PostID'] . "'>Edit</a></td>";
                             echo "<td><a class='delete' href='mangepostback.php'>Delete</a></td>";
                             echo "</tr>";
                         }
@@ -109,13 +111,6 @@
          </table>
     </div>
 
- 
-
-    <div class="button">
-
-
-
-</div>
     <script src="./common/common.js"></script>
     <script src="./admin/adminpages.js"></script>
     <!-- <script>

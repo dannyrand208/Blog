@@ -1,9 +1,20 @@
 
 <?php // <--- do NOT put anything before this PHP tag
 	include('Functions.php');
-	
+    $dbh = connectToDatabase();
+    $statement = $dbh-> prepare ("SELECT * FROM Topic");
+    $statement -> execute();
+    $data = array();
+
+
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
     $cookieMessage = getCookieMessage();
 	$cookieUser = getCookieUser()
+    
+   
 
    
 ?>
@@ -70,37 +81,33 @@
                 <a href="managetopic.php" class="btn btn-big">Manage Topic</a>
         </div>
 
-        <div class="content">
-            <h2 class="page-title"> Manage topic</h2>
+
       
 
+        <div class="content">
+            <h2 class="page-title"> Manage topic</h2>
 
+            <?php
+				        echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
+		        ?>
             <table>
                 <thead>
                     <th>Topic ID</th>
                     <th>Topic Name</th>
                     <th colspan="2">Action</th>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Dit me Lam</td>
-                        <td><a href="#" class="edit">Edit</a></td>
-                        <td><a href="#" class="delete">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>dep zai day</td>
-                        <td><a href="#" class="edit">Edit</a></td>
-                        <td><a href="#" class="delete">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Cuoc doi tuoi dep</td>
-                        <td><a href="#" class="edit">Edit</a></td>
-                        <td><a href="#" class="delete">Delete</a></td>
-                    </tr>
-                </tbody>
+        <?php 
+        foreach($data as $row) {
+            echo'<tbody>';
+            echo'<tr>';
+            echo'<td>'.$row['TopicID'].'</td>';
+            echo'<td>'.$row['Topic'].'</td>';
+            echo '<td><a href="edit_topic.php?topic_id=' . $row['TopicID'] . '" class="edit">Edit</a></td>';
+            echo '<td><a href="deletetopic.php?topic_id=' . $row['TopicID'] . '" class="delete">Delete</a></td>';
+            echo'</tr>';
+            echo'</tbody>';
+        }
+        ?>
             </table>
     
             </div>

@@ -8,7 +8,7 @@ if(isset($_POST["submit"])) {
     $body = $_POST['body'];
     $topic = $_POST['topic'];
     $shortbody = $_POST['body1'];
-    $currentTime = date('F j, Y, g:i a');
+    $currentTime = date("Y-m-d H:i:s");
     $username  = $cookieUser;
 
     $dbh = connectToDatabase();

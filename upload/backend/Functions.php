@@ -128,33 +128,14 @@ function updateTopic($topicId, $newTopicName) {
     $statement5 = $dbh->prepare("UPDATE Topic SET Topic = ? WHERE TopicID = ?");
     $statement5->execute([$newTopicName, $topicId]);
 }
-function updateUser($UserId, $newUsername, $newEmail, $newPassword, $newPassword2, $newRole) {
-    $dbh = connectToDatabase();
-    $statement4 = $dbh->prepare("UPDATE User SET username = ?, email = ?, password = ?, password2 = ?, Role = ? WHERE UserID = ?");
-    $statement4->execute([$newUsername, $newEmail, $newPassword, $newPassword2, $newRole, $UserId]);
-    
-	setCookieMessage('The user has been updated sucessfully');
-	redirect('manageuser.php');
 
-
-
-}
 function deleteTopic($topicId) {
     $dbh = connectToDatabase();
     $statement5 = $dbh->prepare("DELETE FROM `Topic` WHERE TopicID = ?");
-    $statement5->execute([$topicId]);
-	setCookieMessage('the topic ID: '.$topicId.' has been deleted sucessfuly');
-	redirect('managetopic.php');
-}
-
-function deleteUser($userId) {
-    $dbh = connectToDatabase();
-    $statement5 = $dbh->prepare("DELETE FROM `User` WHERE UserID = ?");
-    $statement5->execute([$userId]);
-	setCookieMessage('the user id: '.$userId.' has been deleted sucessfuly');
-	redirect('manageuser.php');
+    $statement5->execute($topicId);
 }
 ?>
+
 
 
 
