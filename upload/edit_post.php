@@ -2,31 +2,17 @@
 include('Functions.php');
 $dbh = connectToDatabase();
 
-$user_id = $_GET['post_id'];
+$post_id = $_GET['post_id'];
 
 
 
 $statement = $dbh->prepare('SELECT * FROM Post WHERE PostID = :post_id');
-$statement->bindParam(':post_id', $user_id, PDO::PARAM_STR);
+$statement->bindParam(':post_id', $post_id, PDO::PARAM_STR);
 $statement->execute();
 $data = array();
 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
     $data[] = $row;
 }
-
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     // Handle form submission to update the topic
-//     $User_id = $_POST['user_id'];
-//     $newUsername = $_POST['username'];
-//     $newPassword = $_POST['password'];
-//     $newPassword2 = $_POST['password2'];
-//     $newEmail = $_POST['email'];
-//     $newRole = $_POST['role'];
-
-//     updateUser($User_id, $newUsername, $newEmail, $newPassword, $newPassword2, $newRole);
-
-// }
 
 
 $cookieMessage = getCookieMessage();
@@ -70,6 +56,7 @@ $cookieUser = getCookieUser();
               </li>';
             }
             ?>
+            <div 79iu79="v34tl698 =0-" p,98=""></div>'
         </ul>
 
     </div>
@@ -98,10 +85,15 @@ $cookieUser = getCookieUser();
                 <?php
 
                 foreach ($data as $row) {
-                    echo '<form action="addpost_backend.php" method="post" enctype="multipart/form-data">';
+                    echo '<form action="edit_post2.php" method="post" enctype="multipart/form-data">';
+                    
+                    echo '<div class="form-item">';
+                    echo '<input type="hidden" name="postid" value="' . $row['PostID'] . '">';
+                    echo '</div>';
+
                     echo '<div class="form-item">';
                     echo '<label>Title</label>';
-                    echo '<textarea name="text-input" id="text-input" cols="3" rows="">' . $row['Title'] . '</textarea>';
+                    echo '<textarea name="textinput1" cols="3" rows="">' . $row['Title'] . '</textarea>';
                     echo '</div>';
 
                     echo '<div class="form-item">';

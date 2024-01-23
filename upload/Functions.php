@@ -154,6 +154,14 @@ function deleteUser($userId) {
 	setCookieMessage('the user id: '.$userId.' has been deleted sucessfuly');
 	redirect('manageuser.php');
 }
+
+
+function deletePost($postId) {
+    $dbh = connectToDatabase();
+    $statement5 = $dbh->prepare("DELETE FROM `Post` WHERE PostID = ?");
+    $statement5->execute([$postId]);
+	
+}
 ?>
 
 

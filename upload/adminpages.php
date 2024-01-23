@@ -72,10 +72,10 @@
 
         <div class="content">
             <h2 class="page-title"> Add topic</h2>
-          <?php
+            <?php
 				        echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
 		        ?>
-            <form action="addtopic_backend.php" method="POST">
+            <form action="addtopic_backend.php" method="POST" enctype="multipart/form-data">
             <div class="form-item">
                 <label>Topic Name</label>
                 <textarea name="topic" id="topic" cols="5" rows="5"></textarea>
@@ -84,12 +84,12 @@
                 <label for="">Description</label>
                 <textarea name="description" id="description" cols="10" rows="40"></textarea>
             </div>
-                <label for="">Image</label>
-                <input type="file" name="image" id="image">
+                <label for="fileToUpload">Image</label>
+                <input type="file" name="fileToUpload" id="fileToUpload">
             <div>
             
             <div>
-                <button type="submit" class="btn btn-big">Add Topic</button>
+                <button type="submit" class="btn btn-big">Add Topic </button>
             </div>
                 
             </label>

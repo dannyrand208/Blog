@@ -1,25 +1,25 @@
-
 <?php // <--- do NOT put anything before this PHP tag
-	include('Functions.php');
-    $dbh = connectToDatabase();
-    $statement = $dbh-> prepare ("SELECT * FROM Topic");
-    $statement -> execute();
-    $data = array();
+include('Functions.php');
+$dbh = connectToDatabase();
+$statement = $dbh->prepare("SELECT * FROM Topic");
+$statement->execute();
+$data = array();
 
 
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $data[] = $row;
-    }
+while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+    $data[] = $row;
+}
 
-    $cookieMessage = getCookieMessage();
-	$cookieUser = getCookieUser()
-    
-   
+$cookieMessage = getCookieMessage();
+$cookieUser = getCookieUser()
 
-   
-?>
+
+
+
+    ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,50 +28,51 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="managetopic.css">
 </head>
-        
+
 <body>
     <div class="navbar">
-       
-       <a class="logo" href="home.php">
-           <img class="logo-img" src="https://seeklogo.com/images/B/blogger_B-logo-47610B2F87-seeklogo.com.png" alt="ok">
-       </a>
-         
-       <ul class="link-container">
-    <li class="link-item"><a href="home.php" class="link">Home</a></li>
 
-    <div id="user_info">
+        <a class="logo" href="home.php">
+            <img class="logo-img" src="https://seeklogo.com/images/B/blogger_B-logo-47610B2F87-seeklogo.com.png"
+                alt="ok">
+        </a>
 
-    
-</div>
-    <?php 
-    if (empty($cookieUser)) {
+        <ul class="link-container">
+            <li class="link-item"><a href="home.php" class="link">Home</a></li>
 
-    
-        echo '<li class="link-item"><a href="/myprogram/upload/login.php" class="link">Login</a></li>';
-    } else {
-        echo '<li class="link-item">
+            <div id="user_info">
+
+
+            </div>
+            <?php
+            if (empty($cookieUser)) {
+
+
+                echo '<li class="link-item"><a href="/myprogram/upload/login.php" class="link">Login</a></li>';
+            } else {
+                echo '<li class="link-item">
                 <a class="dropbtn">' . $cookieUser . '&#9662;</a>
                 <div class="dropdown-content" id="dropdownContent">
                     <a href="logoutUser.php">Logout</a>
                 </div>
               </li>';
-    }
-    ?>
+            }
+            ?>
         </ul>
 
     </div>
 
- <div class=admin-wrapper>
-    
+    <div class=admin-wrapper>
+
         <div class="sidebar">
-        <!-- Left Sidebar -->
-        <header>Manage </header>  
-        <ul >
-          <li> <a  href="managepost.php">Manage Post</a></li>
-            <li> <a  href="manageuser.php">Manage Users</a></li>
-            <li> <a  href="managetopic.php">Manage Topics</a></li>
-            <li> <a  href="about.php">About</a></li>
-        </ul>    
+            <!-- Left Sidebar -->
+            <header>Manage </header>
+            <ul>
+                <li> <a href="managepost.php">Manage Post</a></li>
+                <li> <a href="manageuser.php">Manage Users</a></li>
+                <li> <a href="managetopic.php">Manage Topics</a></li>
+                <li> <a href="about.php">About</a></li>
+            </ul>
         </div>
 
 
@@ -79,51 +80,73 @@
             <div class="button-group">
                 <a href="adminpages.php" class="btn btn-big">Add Topic</a>
                 <a href="managetopic.php" class="btn btn-big">Manage Topic</a>
-        </div>
+            </div>
 
 
-      
 
-        <div class="content">
-            <h2 class="page-title"> Manage topic</h2>
 
-            <?php
-				        echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
-		        ?>
-            <table>
-                <thead>
-                    <th>Topic ID</th>
-                    <th>Topic Name</th>
-                    <th colspan="2">Action</th>
-                </thead>
-        <?php 
-        foreach($data as $row) {
-            echo'<tbody>';
-            echo'<tr>';
-            echo'<td>'.$row['TopicID'].'</td>';
-            echo'<td>'.$row['Topic'].'</td>';
-            echo '<td><a href="edit_topic.php?topic_id=' . $row['TopicID'] . '" class="edit">Edit</a></td>';
-            echo '<td><a href="deletetopic.php?topic_id=' . $row['TopicID'] . '" class="delete">Delete</a></td>';
-            echo'</tr>';
-            echo'</tbody>';
-        }
-        ?>
-            </table>
-    
+            <div class="content">
+                <h2 class="page-title"> Manage topic</h2>
+
+                <?php
+                echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
+                ?>
+                <table>
+                    <thead>
+                        <th>Topic ID</th>
+                        <th>Topic Name</th>
+                        <th>User Created</th>
+                        <th colspan="2">Action</th>
+                    </thead>
+                    <?php
+
+                    session_start();
+                    echo '<p>Your role: '.$_SESSION['role'].'<p>';
+
+                    foreach ($data as $row) {
+                        if ($_SESSION['role'] === "User") {
+                            if ($_SESSION['user_name'] === $row['username']) {
+
+                                echo '<tbody>';
+                                echo '<tr>';
+                                echo '<td>' . $row['TopicID'] . '</td>';
+                                echo '<td>' . $row['Topic'] . '</td>';
+                                echo '<td>' . $row['username'] . '</td>';
+                                echo '<td><a href="edit_topic.php?topic_id=' . $row['TopicID'] . '" class="edit">Edit</a></td>';
+                                echo '<td><a href="deletetopic.php?topic_id=' . $row['TopicID'] . '" class="delete">Delete</a></td>';
+                                echo '</tr>';
+                                echo '</tbody>';
+                            }
+                        } else {
+                            echo '<tbody>';
+                            echo '<tr>';
+                            echo '<td>' . $row['TopicID'] . '</td>';
+                            echo '<td>' . $row['Topic'] . '</td>';
+                            echo '<td>' . $row['username'] . '</td>';
+                            echo '<td><a href="edit_topic.php?topic_id=' . $row['TopicID'] . '" class="edit">Edit</a></td>';
+                            echo '<td><a href="deletetopic.php?topic_id=' . $row['TopicID'] . '" class="delete">Delete</a></td>';
+                            echo '</tr>';
+                            echo '</tbody>';
+
+                        }
+                    }
+                    ?>
+                </table>
+
             </div>
             </form>
 
 
         </div>
 
-            
+
     </div>
 
     <div class="button">
 
 
 
-</div>
+    </div>
     <script src="./common/common.js"></script>
     <script src="./admin/adminpages.js"></script>
     <!-- <script>
@@ -149,13 +172,14 @@
     </script>
  -->
 
-    
- 
-    
-  <div class="admin-content">
-    <div class="button-group"></div>
-  </div>
-  <script src="./common/common.js"></script>
-  <script src="./admin/adminpages.js"></script>
+
+
+
+    <div class="admin-content">
+        <div class="button-group"></div>
+    </div>
+    <script src="./common/common.js"></script>
+    <script src="./admin/adminpages.js"></script>
 </body>
+
 </html>
