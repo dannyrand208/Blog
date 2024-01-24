@@ -351,45 +351,78 @@ if ($row) {
 
     </script>
 
-<script type="text/javascript">
-    var request;
+    <script type="text/javascript">
+        $('.like, .dislike').click(function () {
+            var status = $(this).hasClass('like') ? 'like' : 'dislike';
+            var data = {
+                post_id: <?php echo $post_id; ?>,
+                user_name: '<?php echo $cookieUser; ?>',
+                status: status
+            };
 
-    $('.like, .dislike').click(function() {
-        if (request) {
-            request.abort();
-        }
+            $.ajax({
+                url: 'update_like.php',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    // Handle success response here
+                    console.log(response);
+                    response  = JSON.parse(response);
+                    var action = response.action;
+                    if (action === 'insert') {
+                        if (status == 'like') {
+                            var cnt_like = $('.likes_count').data('count');
+                            $('.likes_count').data('count', cnt_like + 1);
+                            $('.likes_count').text(cnt_like + 1);
+                        } else if (status == 'dislike') {
+                            var cnt_dislike = $('.dislikes_count').data('count');;
+                            $('.dislikes_count').data('count', cnt_dislike + 1);
+                            $('.dislikes_count').text(cnt_dislike + 1);
+                        }
+                        
+                    } else if (action == 'back_to_normal') {
+                        if(status =='like'){
+                            var cnt_like = $('.likes_count').data('count');
+                            $('.likes_count').data('count', cnt_like - 1);
+                            $('.likes_count').text(cnt_like - 1);
+                        }else if(status =='dislike') {
+                            var cnt_dislike = $('.dislikes_count').data('count');
+                            $('.dislikes_count').data('count', cnt_dislike - 1);
+                            $('.dislikes_count').text(cnt_dislike - 1);
+                        }
+                    } else if (action == 'update'){
+                        if(status =='like'){
+                            var cnt_like = $('.likes_count').data('count');
+                            $('.likes_count').data('count', cnt_like + 1);
+                            $('.likes_count').text(cnt_like + 1);
+                            var cnt_dislike = $('.dislikes_count').data('count');
+                            $('.dislikes_count').data('count', cnt_dislike - 1);
+                            $('.dislikes_count').text(cnt_dislike - 1);
 
-        var data = {
-            post_id: <?php echo $post_id; ?>,
-            user_name : <?php echo $cookieUser; ?>,
-            status :$(this).hasClass('like')? 'like' : 'dislike',
+                        } else if (status =='dislike') {
+                            var cnt_like = $('.likes_count').data('count');
+                            $('.likes_count').data('count', cnt_like - 1);
+                            $('.likes_count').text(cnt_like - 1);
+                            var cnt_dislike = $('.dislikes_count').data('count');
+                            $('.dislikes_count').data('count', cnt_dislike + 1);
+                            $('.dislikes_count').text(cnt_dislike + 1);
+
+                           
+
+                        }
             
-        }
-       
-        // Assuming you want to send the post_id and action to the server using AJAX
-        request = $.ajax({
-            url: 'update_like.php',
-            type: 'POST',
-            data: data,
+                    } else {
+                        console.log('hello4');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle error here
+                    console.error(xhr.responseText);
+                }
+            });
         });
 
-        request.done(function (response, textStatus, jqXHR) {
-            // Log a message to the console
-            console.log("Hooray, it worked!");
-        })
-
-         // Callback handler that will be called on failure
-        request.fail(function (jqXHR, textStatus, errorThrown){
-            // Log the error to the console
-            console.error(
-                "The following error occurred: "+
-                textStatus, errorThrown
-            );
-        });
-    });
-;
-
-</script>
+    </script>
 
 </body>
 
