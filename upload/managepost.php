@@ -101,11 +101,13 @@ $cookieUser = getCookieUser()
                         <?php
                         session_start();
                         echo '<p>Your role: ' . $_SESSION['role'] . '<p>';
+                 
 
                         foreach ($data as $row) {
                             if ($_SESSION['role'] === "User") {
-                                if ($_SESSION['user_name'] === $row['username']) {
 
+                                if ($_SESSION['user_name'] === $row['username']) {
+                                    
                                     echo "<tr>";
                                     echo "<td>" . $row['PostID'] . "</td>";
                                     echo "<td>" . $row['Title'] . "</td>";

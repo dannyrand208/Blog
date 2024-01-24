@@ -8,7 +8,7 @@ try {
     $email = $_POST['email'];
     $passWord = $_POST['password'];
     $passWord2 = $_POST['password1'];
-    $role = $_POST['topic'];
+    $role = $_POST['role'];
     
 
     $dbh = connectToDatabase();

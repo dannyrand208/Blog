@@ -74,78 +74,98 @@ $cookieUser = getCookieUser();
             </ul>
         </div>
 
+        <?php
+        session_start();
+        if ($_SESSION['role'] === "User") {
+            echo '<div class="admin-content">
+            <div class="content">
+                <h2 class="page-title"> Your Account</h2>';
+            echo '<table>
+        <thead>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Email </th>
+            <th>Role</th>
+            <th colspan="2">Action</th>
+        </thead>
+        <tbody>';
 
-        <div class="admin-content">
+            echo '<p>Your role: ' . $_SESSION['role'] . '</p>';
+            foreach ($data as $row) {
+                if ($_SESSION['user_name'] === $row["username"]) {
+                    echo "<tr>";
+                    echo "<td>" . $row["username"] . "</td>";
+                    echo "<td>" . $row["password"] . "</td>";
+                    echo "<td>" . $row["email"] . "</td>";
+                    echo "<td>" . $row["Role"] . "</td>";
+                    echo "<td><a class='edit' href=\"edit_user.php?user_id=" . $row['UserID'] . "\">Edit</a></td>";
+                    echo "</tr>";
+                }
+            }
+
+        } else {
+            echo '<div class="admin-content">
             <div class="button-group">
                 <a href="adduser.php" class="btn btn-big">Add Users</a>
                 <a href="manageuser.php" class="btn btn-big">Manage Users</a>
             </div>
 
             <div class="content">
+                <h2 class="page-title"> Manage User</h2>';
 
-                <h2 class="page-title"> Manage User</h2>
+            echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
+            echo '<table>
+            <thead>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email </th>
+                <th>Role</th>
+                <th colspan="2">Action</th>
+            </thead>
+            <tbody>';
 
-                <?php
-                echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
-                ?>
-                <table>
-                    <thead>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Email </th>
-                        <th>Role</th>
-                        <th colspan='2'>Action</th>
-                    </thead>
-                    <tbody>
-                        <?php
-                        session_start();
-                        echo '<p>Your role: '.$_SESSION['role'].'<p>';
-                        foreach ($data as $row) {
-                            if ($_SESSION['role'] === "Admin") {
-                                if ($_SESSION['user_name'] === $row['username']) {
+            echo '<p>Your role: ' . $_SESSION['role'] . '</p>';
 
-                                    echo "<tr>";
-                                    echo "<td>" . $row['username'] . "</td>";
-                                    echo "<td>" . $row['password'] . "</td>";
-                                    echo "<td>" . $row['email'] . "</td>";
-                                    echo "<td>" . $row['Role'] . "</td>";
-                                    echo "<td><a class='edit' href='edit_user.php?user_id=" . $row['UserID'] . "'>Edit</a></td>";
-                                    echo "<td><a class='edit' style='color:blue;''>User In Use</a></td>";
-                                } else {
-                                    echo "<tr>";
-                                    echo "<td>" . $row['username'] . "</td>";
-                                    echo "<td>" . $row['password'] . "</td>";
-                                    echo "<td>" . $row['email'] . "</td>";
-                                    echo "<td>" . $row['Role'] . "</td>";
-                                    echo "<td><a class='edit' href='edit_user.php?user_id=" . $row['UserID'] . "'>Edit</a></td>";
-                                    echo "<td><a class='delete' href='deleteuser.php?user_id=" . $row['UserID'] . "'>Delete</a></td>";
-                                    echo "</tr>";
-                                }
+            foreach ($data as $row) {
+                if ($_SESSION['user_name'] === $row["username"]) {
+                    echo "<tr>";
+                    echo "<td>" . $row["username"] . "</td>";
+                    echo "<td>" . $row["password"] . "</td>";
+                    echo "<td>" . $row["email"] . "</td>";
+                    echo "<td>" . $row["Role"] . "</td>";
+                    echo "<td><a class='edit' href=\"edit_user.php?user_id=" . $row['UserID'] . "\">Edit</a></td>";
+                    echo "<td><a class='delete' style='color:blue;' >In Use</a></td>";
+                    echo "</tr>";
+                } else {
+                    echo "<tr>";
+                    echo "<td>" . $row["username"] . "</td>";
+                    echo "<td>" . $row["password"] . "</td>";
+                    echo "<td>" . $row["email"] . "</td>";
+                    echo "<td>" . $row["Role"] . "</td>";
+                    echo "<td><a class='edit' href=\"edit_user.php?user_id=" . $row['UserID'] . "\">Edit</a></td>";
+                    echo "<td><a class='delete' href='deleteuser.php?user_id=" . $row['UserID'] . "'>Delete</a></td>";
+                    echo "</tr>";
+                }
+            }
 
-                            } else {
-                              
+            echo '</tbody></table></div></div>';
+        }
+        ?>
 
-
-                            }
-
-                        }
+        </tbody>
+        </table>
 
 
-                        ?>
-                    </tbody>
-                </table>
+    </div>
 
-
-            </div>
-
-            <div class="button">
+    <div class="button">
 
 
 
-            </div>
-            <script src="./common/common.js"></script>
-            <script src="./admin/adminpages.js"></script>
-            <!-- <script>
+    </div>
+    <script src="./common/common.js"></script>
+    <script src="./admin/adminpages.js"></script>
+    <!-- <script>
         // JavaScript for handling the asynchronous form submission
         function addTopic() {
             var topicName = document.getElementById('topicName').value;
@@ -171,11 +191,11 @@ $cookieUser = getCookieUser();
 
 
 
-            <div class="admin-content">
-                <div class="button-group"></div>
-            </div>
-            <script src="./common/common.js"></script>
-            <script src="./admin/adminpages.js"></script>
+    <div class="admin-content">
+        <div class="button-group"></div>
+    </div>
+    <script src="./common/common.js"></script>
+    <script src="./admin/adminpages.js"></script>
 </body>
 
 </html>

@@ -1,14 +1,14 @@
-
 <?php // <--- do NOT put anything before this PHP tag
-	include('Functions.php');
-	
-    $cookieMessage = getCookieMessage();
-	$cookieUser = getCookieUser()
+include('Functions.php');
 
-   
-?>
+$cookieMessage = getCookieMessage();
+$cookieUser = getCookieUser()
+
+
+    ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,109 +17,115 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="adminpages1.css">
 </head>
-        
+
 <body>
     <div class="navbar">
-       
-       <a class="logo" href="home.php">
-           <img class="logo-img" src="https://seeklogo.com/images/B/blogger_B-logo-47610B2F87-seeklogo.com.png" alt="ok">
-       </a>
-         
-       <ul class="link-container">
-    <li class="link-item"><a href="home.php" class="link">Home</a></li>
 
-    <div id="user_info">
+        <a class="logo" href="home.php">
+            <img class="logo-img" src="https://seeklogo.com/images/B/blogger_B-logo-47610B2F87-seeklogo.com.png"
+                alt="ok">
+        </a>
 
-    
-</div>
-    <?php 
-    if (empty($cookieUser)) {
+        <ul class="link-container">
+            <li class="link-item"><a href="home.php" class="link">Home</a></li>
 
-    
-        echo '<li class="link-item"><a href="/myprogram/upload/login.php" class="link">Login</a></li>';
-    } else {
-        echo '<li class="link-item">
+            <div id="user_info">
+
+
+            </div>
+            <?php
+            if (empty($cookieUser)) {
+
+
+                echo '<li class="link-item"><a href="/myprogram/upload/login.php" class="link">Login</a></li>';
+            } else {
+                echo '<li class="link-item">
                 <a class="dropbtn">' . $cookieUser . '&#9662;</a>
                 <div class="dropdown-content" id="dropdownContent">
                     <a href="logoutUser.php">Logout</a>
                 </div>
               </li>';
-    }
-    ?>
+            }
+            ?>
         </ul>
 
     </div>
 
- <div class=admin-wrapper>
-    
+    <div class=admin-wrapper>
+
         <div class="sidebar">
-        <!-- Left Sidebar -->
-        <header>Manage </header>  
-        <ul >
-            <li> <a  href="managepost.php">Manage Post</a></li>
-            <li> <a  href="manageuser.php">Manage Users</a></li>
-            <li> <a  href="managetopic.php">Manage Topics</a></li>
-            <li> <a  href="about.php">About</a></li>
-        </ul>    
+            <!-- Left Sidebar -->
+            <header>Manage </header>
+            <ul>
+                <li> <a href="managepost.php">Manage Post</a></li>
+                <li> <a href="manageuser.php">Manage Users</a></li>
+                <li> <a href="managetopic.php">Manage Topics</a></li>
+                <li> <a href="about.php">About</a></li>
+            </ul>
         </div>
 
 
-        <div class="admin-content">
-            <div class="button-group">
-                <a href="adduser.php" class="btn btn-big">Add Users</a>
-                <a href="manageuser.php" class="btn btn-big">Manage Users</a>
-        </div>
 
-        <div class="content">
-           
-            <h2 class="page-title"> Add User</h2>
 
-            <?php
-				        echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
-		        ?>
-                
-            <form action="adduser_backend.php" method="POST">
-        <div class='adduser' style='font-size: 20px;
-                                    display: flex;
-                                    gap: 20px;
-                                    flex-direction: row;
-                                    flex-wrap: nowrap;'>
-            <label for="username">Username</label>
-                    <input type="text" id="username" name="username"  >
-                    
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email"  >
-
-                     <label for="password">Password</label>
-                     <input type="text" id="password" name="password"  >
-                     
-                     <label for="password2">Password Again</label>
-                     <input type="passwsord1" id="password1" name="password1" >
-
-                                          
-                     <label for="role">Role</label>
-                     <select name="topic" class="topic" id='topic'>
-                            <option value="Admin">Admin</option>
-                            <option value="Users">Users</option>
-
-                    </select>
-                     
-                     <button type="submit">Submit</button>
-
-        </div>
-            </form>
-
- 
-       
-
-   
+        <?php
+        session_start();
+        if ($_SESSION['role'] === "User") {
+            echo '<p style="color:red; font-size:20px; font-weight:bold; margin-left: 10px;"> U dont have permit to access this role<p>';
+        } else {
+            echo "
+<div class='admin-content'>
+    <div class='button-group'>
+        <a href='adduser.php' class='btn btn-big'>Add Users</a>
+        <a href='manageuser.php' class='btn btn-big'>Manage Users</a>
     </div>
 
+    <div class='content'>
+        <h2 class='page-title'>Add User</h2>";
+
+            if (isset($cookieMessage)) {
+                echo "<p class='cookie' style='color:red'>$cookieMessage</p>";
+            }
+            echo "
+            <form action='adduser_backend.php' method='POST'>
+                <div class='adduser' style='font-size: 20px;
+                                            display: flex;
+                                            gap: 20px;
+                                            flex-direction: row;
+                                            flex-wrap: nowrap;'>
+                    <label for='username'>Username</label>
+                    <input type='text' id='username' name='username'>
+                    
+                    <label for='email'>Email</label>
+                    <input type='text' id='email' name='email'>
+            
+                    <label for='password'>Password</label>
+                    <input type='password' id='password' name='password'>
+                    
+                    <label for='password1'>Password Again</label>
+                    <input type='password' id='password1' name='password1'>
+            
+                    <label for='role'>Role</label>
+                    <select name='role' class='role' id='role'>
+                        <option value='Admin'>Admin</option>
+                        <option value='User'>User</option>
+                    </select>
+                    
+                    <button type='submit'>Submit</button>
+                </div>
+            </form>
+            ";
+
+
+        }
+
+
+        ?>
+    </div>
     <div class="button">
 
 
 
-</div>
+    </div>
     <script src="./common/common.js"></script>
     <script src="./admin/adminpages.js"></script>
     <!-- <script>
@@ -145,13 +151,14 @@
     </script>
  -->
 
-    
- 
-    
-  <div class="admin-content">
-    <div class="button-group"></div>
-  </div>
-  <script src="./common/common.js"></script>
-  <script src="./admin/adminpages.js"></script>
+
+
+
+    <div class="admin-content">
+        <div class="button-group"></div>
+    </div>
+    <script src="./common/common.js"></script>
+    <script src="./admin/adminpages.js"></script>
 </body>
+
 </html>

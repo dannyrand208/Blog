@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Facebook-like Comment</title>
+</head>
+<body>
+
+<div class="comment-container">
+    <!-- Comment Section -->
+    <div class="comment">
+        <div class="comment-header">
+            <div class="user-info">
+                <img src="avatar.jpg" alt="Avatar" class="avatar">
+                <div class="user-details">
+                    <p class="username">John Doe</p>
+                    <p class="timestamp">2 hours ago</p>
+
+                </div>
+                <button style="margin-left:400px;" class="options-btn" onclick="toggleOptions()">...</button>
+            </div>
+            <div class="options">
+                
+                <div class="options-menu">
+                    <button class="edit-btn" onclick="editComment()">Edit</button>
+                </div>
+            </div>
+        </div>
+        <p class="comment-text">This is a sample comment. It can be longer and more detailed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet ultrices mauris. Nulla facilisi. Nam vel consectetur lacus. Duis euismod vitae quam sit amet euismod. Sed in ullamcorper mi. Sed ac odio vel arcu dignissim euismod non non felis.</p>
+        <div class="like-section">
+            <button class="like-btn" onclick="toggleLike(this)">Like</button>
+            <span class="like-count">0 likes</span>
+        </div>
+    </div>
+
+    <!-- Comment Form -->
+    <div class="comment-form">
+        <div class="user-info">
+            <img src="your_avatar.jpg" alt="Your Avatar" class="avatar">
+            <div class="user-details">
+                <p class="username">Your Username</p>
+            </div>
+        </div>
+        <textarea name="newComment" id="newComment" placeholder="Write your comment here" required></textarea>
+        <button type="submit" onclick="submitComment(event)">Post</button>
+    </div>
+</div>
+<style>
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.comment-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.comment, .comment-form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 14px;
+    color: #385898;
+    margin: 0;
+}
+
+.timestamp {
+    font-size: 12px;
+    color: #606770;
+    margin: 0;
+}
+
+.comment-text {
+    margin-bottom: 10px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.comment-actions {
+    display: flex;
+    align-items: center;
+}
+
+.edit-btn, .like-btn, .options-btn {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #606770;
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.edit-btn:hover, .like-btn:hover, .options-btn:hover {
+    color: #385898;
+}
+
+.like-count {
+    color: #606770;
+    font-size: 14px;
+}
+
+.comment-form textarea {
+    resize: none;
+    height: 80px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.comment-form button {
+    cursor: pointer;
+    border: none;
+    background-color: #385898;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.comment-form button:hover {
+    background-color: #2d4373;
+}
+
+.options {
+    position: relative;
+}
+
+.options-menu {
+    display: none;
+}
+
+/* Existing styles remain unchanged */
+
+.comment-text {
+    margin-bottom: 10px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.comment-form textarea {
+    resize: none;
+    height: 120px; /* Adjusted height */
+    margin-bottom: 20px; /* Increased margin */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.comment-form button {
+    cursor: pointer;
+    border: none;
+    background-color: #385898;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.comment-form button:hover {
+    background-color: #2d4373;
+}
+
+</style>
+<script src="script.js"></script>
+</body>
+</html>

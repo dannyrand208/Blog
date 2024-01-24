@@ -1,8 +1,15 @@
 <?php
 // <--- do NOT put anything before this PHP tag
 include('Functions.php');
+session_start();
+$cookieMessage = getCookieMessage();
+$cookieUser = getCookieUser();
 
 $post_id = $_GET['post_id'];
+
+$_SESSION['post_id'] = $post_id;
+
+
 
 $dbh = connectToDatabase();
 
@@ -10,14 +17,50 @@ $statement = $dbh->prepare('SELECT * FROM POST WHERE PostID = :post_id');
 $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
 $statement->execute();
 
+
+
 $data = array();
 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
     $data[] = $row;
 }
+$post_id = $_GET['post_id'];
+$username = $cookieUser;
+$query = "SELECT COUNT(*) AS likes FROM Likes WHERE PostID = ? AND rating_action = 'like'";
+$stmt = $dbh->prepare($query);
+$stmt->bindValue(1, $post_id); //Assuming post_id is an integer, a djust the type accordingly
+$stmt->execute();
+$like_count = $stmt->fetch(PDO::FETCH_ASSOC)['likes'];
 
-$cookieMessage = getCookieMessage();
-$cookieUser = getCookieUser();
+
+$query1 = "SELECT COUNT(*) AS dislikes FROM Likes WHERE PostID = ? AND rating_action = 'dislike'";
+$stmt1 = $dbh->prepare($query1);
+$stmt1->bindValue(1, $post_id); //Assuming post_id is an integer, a djust the type accordingly
+$stmt1->execute();
+$dislike_count = $stmt1->fetch(PDO::FETCH_ASSOC)['dislikes'];
+
+
+
+$query2 = "SELECT rating_action FROM Likes WHERE PostID = ? AND username = ?";
+$stmt2 = $dbh->prepare($query2);
+$stmt2->bindValue(1, $post_id);
+$stmt2->bindValue(2, $cookieUser);
+$stmt2->execute();
+$row = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+
+
+if ($row) {
+    $status = $row['rating_action'];
+} else {
+    $status = 0;
+}
+
+
+
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,14 +68,17 @@ $cookieUser = getCookieUser();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog: Homepage</title>
-    <link rel="stylesheet" href="singleblog3.css">
+    <link rel="stylesheet" href="singleblog.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <!-- Include FontAwesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
 </head>
+
 
 <body>
     <nav class="navbar">
@@ -66,10 +112,10 @@ $cookieUser = getCookieUser();
                 <form method="post" id="themeToggleBtn">
             <li class="link-item">
 
-                <img src="img/moon.png" class="icon" id="icon" >
+                <img src="img/moon.png" class="icon" id="icon">
 
 
-            </form>
+                </form>
 
 
         </ul>
@@ -79,11 +125,43 @@ $cookieUser = getCookieUser();
         <?php
         foreach ($data as $row) {
             echo '<div class="banner">';
-            echo '   <img src="img/' . $row['Image_url'] . '" alt="">';
+            echo '<img src="img/' . $row['Image_url'] . '" alt="">';
             echo '</div>';
             echo '<div class="blog">';
-            echo '    <h1 class="title">' . $row['Title'] . '</h1>';
-            echo '<p class="published1" style="color:blue; font-weight:bold;"><span><i class="fas fa-user-alt" ></i>Author: ' . $row['username'] . '</span></p>';
+            echo '<h1 class="title">' . $row['Title'] . '</h1>';
+            echo '<p class="published1" style="color: blue; font-weight: bold;"><span><i class="fas fa-user-alt"></i>Author: ' . $row['username'] . '</span></p>';
+            echo '<div class="like-section">';
+            echo '<input type="hidden" name="post_id" value="' . $row['PostID'] . '">';
+
+            // Assuming $status is already defined and contains the like status
+        
+            // Use a ternary operator to conditionally add the 'selected' class
+            $selectedClass = ($status == 'like') ? 'selected' : '';
+            $data_post_id = $post_id;
+
+
+            echo '<button style="font-size: 24px" class="like-btn like ' . $selectedClass . '" data-post-id ="' . $data_post_id . '" ><i class="fa fa-thumbs-up"></i></button>';
+            echo '<span class="likes_count ' . $post_id . '" data-count ="' . $like_count . '" >' . $like_count . '</span>';
+
+
+
+
+
+
+            echo '<input type="hidden" name="post_id" value="' . $row['PostID'] . '">';
+
+            $selectedClass = ($status == 'dislike') ? 'selected' : '';
+            $data_post_id = $post_id;
+
+
+            echo '<button style="font-size: 24px" class="like-btn dislike ' . $selectedClass . '" data-post-id ="' . $data_post_id . '" ><i class="fa fa-thumbs-down"></i></button>';
+            echo '<span class="dislikes_count ' . $post_id . '" data-count ="' . $dislike_count . '" >' . $dislike_count . '</span>';
+            echo '</div>';
+
+
+
+
+
             echo '<br>';
             echo '    <p class="published""><span><i class="far fa-calendar-alt"></i> ' . $row['currentTime'] . '</span></p>';
             echo '<br>';
@@ -94,8 +172,111 @@ $cookieUser = getCookieUser();
         }
         ?>
 
+        <br> <br> <br> <br>
+
 
     </section>
+    <div class="comment-container">
+        <h2>Comment</h2>
+        <br>
+
+        <div class="comment">
+            <div class="comment-header">
+                <div class="user-info">
+                    <div class="ava">
+                        <img src="img/181210-roger-buff-kangaroo-mn-0840.jpg" alt="Avatar" class="avatar">
+                        <div class="user-details">
+                            <p class="username">Lam Thon</p>
+                            <p class="timestamp">2 hours ago</p>
+                        </div>
+
+                    </div>
+
+                    <button style="margin-left:400px;" class="options-btn" onclick="toggleOptions()">...</button>
+                </div>
+                <div class="options">
+
+                    <div class="options-menu">
+                        <button class="edit-btn" onclick="editComment()">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <p class="comment-text">Cai post nay trong ngu vcl nma thoi vay
+
+            </p>
+            <div class="like-section">
+                <button style="font-size:24px" class="like-btn" onclick="toggleLike(this)"><i
+                        class="fa fa-thumbs-up"></i></button>
+                <span class="like-count">0 likes</span>
+
+
+
+                <button style="font-size:24px" class="like-btn" onclick="toggleLike(this)"><i
+                        class="fa fa-thumbs-down"></i></button>
+                <span class="like-count">0 likes</span>
+
+            </div>
+        </div>
+
+
+
+        <div class="comment">
+            <div class="comment-header">
+                <div class="user-info">
+                    <div class="ava">
+                        <img src="img/181210-roger-buff-kangaroo-mn-0840.jpg" alt="Avatar" class="avatar">
+                        <div class="user-details">
+                            <p class="username">Dep trai Thon</p>
+                            <p class="timestamp">2 hours ago</p>
+                        </div>
+
+                    </div>
+
+                    <button style="margin-left:400px;" class="options-btn" onclick="toggleOptions()">...</button>
+                </div>
+                <div class="options">
+
+                    <div class="options-menu">
+                        <button class="edit-btn" onclick="editComment()">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <p class="comment-text">Cai post nay trong ngu vcl nma thoi vay
+
+            </p>
+            <div class="like-section">
+                <button style="font-size:24px" class="like-btn" onclick="toggleLike(this)"><i
+                        class="fa fa-thumbs-up"></i></button>
+                <span class="like-count">0 likes</span>
+
+
+
+                <button style="font-size:24px" class="like-btn" onclick="toggleLike(this)"><i
+                        class="fa fa-thumbs-down"></i></button>
+                <span class="like-count">0 likes</span>
+
+            </div>
+        </div>
+
+
+        <div class="comment-form">
+            <div class="user-info">
+                <div class="ava">
+                    <img src="img/frog.jpeg" alt="Your Avatar" class="avatar">
+
+                    <div class="user-details">
+                        <p class="username">Your Username</p>
+
+                    </div>
+                </div>
+            </div>
+            <textarea name="newComment" id="newComment" placeholder="Write your comment here" required></textarea>
+            <div class="post">
+                <button type="submit" onclick="submitComment(event)">Post</button>
+            </div>
+        </div>
+    </div>
+
 
     <footer class="footer">
         <div class="container">
@@ -162,7 +343,7 @@ $cookieUser = getCookieUser();
             }
 
             // Check local storage for theme preference
-         
+
 
             // Add a click event listener to the button
             themeToggleBtn.addEventListener("click", toggleTheme);
@@ -170,6 +351,45 @@ $cookieUser = getCookieUser();
 
     </script>
 
+<script type="text/javascript">
+    var request;
+
+    $('.like, .dislike').click(function() {
+        if (request) {
+            request.abort();
+        }
+
+        var data = {
+            post_id: <?php echo $post_id; ?>,
+            user_name : <?php echo $cookieUser; ?>,
+            status :$(this).hasClass('like')? 'like' : 'dislike',
+            
+        }
+       
+        // Assuming you want to send the post_id and action to the server using AJAX
+        request = $.ajax({
+            url: 'update_like.php',
+            type: 'POST',
+            data: data,
+        });
+
+        request.done(function (response, textStatus, jqXHR) {
+            // Log a message to the console
+            console.log("Hooray, it worked!");
+        })
+
+         // Callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            // Log the error to the console
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+    });
+;
+
+</script>
 
 </body>
 

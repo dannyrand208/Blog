@@ -41,7 +41,7 @@ $cookieUser = getCookieUser();
 </head>
 
 <body>
-    <p> erwqeweqweqwe</p>
+  
     <nav class="navbar">
         <a class="logo" href="home.php">
             <img class="logo-img" src="https://seeklogo.com/images/B/blogger_B-logo-47610B2F87-seeklogo.com.png"
@@ -153,6 +153,8 @@ $cookieUser = getCookieUser();
             }
         }
         ?>
+
+
 
 
     </section>
