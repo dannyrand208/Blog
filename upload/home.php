@@ -15,7 +15,7 @@ $themeConfig = getCookieTheme();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog: Homepage</title>
-    <link rel="stylesheet" href="home1.css">
+    <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -23,7 +23,8 @@ $themeConfig = getCookieTheme();
 
 </head>
 
-<body class="<?php if ($themeConfig == "dark") echo 'dark-theme'; ?>">
+<body class="<?php if ($themeConfig == "dark")
+    echo 'dark-theme'; ?>">
     <nav class="navbar">
 
         <a class="logo" href="home.php">
@@ -43,10 +44,39 @@ $themeConfig = getCookieTheme();
 
                 } else {
                     echo '<li class="link-item"><a href="managetopic.php" class="link">Admin</a></li>';
-                    echo '<div class="dropdown" id="userDropdown">
-            <a class="dropbtn">' . $cookieUser . ' &#9662;</a>
-            <div class="dropdown-content" id="dropdownContent">
-                <a href="logoutUser.php">Logout</a>
+                    echo '
+                    <img src="img/1.jpg" alt="" class="user-pic" onclick="toggleMenu()">
+                <div class="sub-menu-wrap" id="subMenu">
+                <div class="sub-menu">
+                    <div class="user-info1">
+                        <img src="img/1.jpg" alt="" clas="user-pic">
+                        <h2>' . $cookieUser . '</h2>
+                    </div>
+                    <hr>
+
+
+                    <a href="#" class="sub-menu-link">
+                    <img src="img/profile.png" alt="">
+                    <p>Edit Profile</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="sub-menu-link">
+                    <img src="img/setting.png" alt="">
+                    <p>Setting and Privacy</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="sub-menu-link">
+                    <img src="img/help.png" alt="">
+                    <p>Help & Support</p>
+                    <span>></span>
+                </a>
+                <a href="logoutUser.php" class="sub-menu-link">
+                    <img src="img/logout.png" alt="">
+                    <p>Logout</p>
+                    <span>></span>
+                </a>
+                </div>
+                  
             </div>
           </div>';
                 }
@@ -99,7 +129,7 @@ $themeConfig = getCookieTheme();
     </header>
 
     <section class="blog-section">
-     <p style="text-align:center; font-size: 55px;"> Trending Post</p>
+        <p style="text-align:center; font-size: 55px;"> Trending Post</p>
 
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
@@ -236,14 +266,21 @@ $themeConfig = getCookieTheme();
             }
 
             // Check local storage for theme preference
-         
+
 
             // Add a click event listener to the button
             themeToggleBtn.addEventListener("click", toggleTheme);
         });
     </script>
 
+    <script>
+        let subMenu = document.getElementById("subMenu");
 
+        function toggleMenu() {
+            console.log(subMenu);
+            subMenu.classList.toggle("open-menu");
+        }
+    </script>
 
 
 </body>

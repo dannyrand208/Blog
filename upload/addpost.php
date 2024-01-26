@@ -15,7 +15,7 @@
     <title>Blog: Homepage</title>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="adminpages1.css">
+    <link rel="stylesheet" href="adminpages.css">
 </head>
         
 <body>
@@ -38,12 +38,29 @@
     
         echo '<li class="link-item"><a href="/myprogram/upload/login.php" class="link">Login</a></li>';
     } else {
-        echo '<li class="link-item">
-                <a class="dropbtn">' . $cookieUser . '&#9662;</a>
-                <div class="dropdown-content" id="dropdownContent">
-                    <a href="logoutUser.php">Logout</a>
-                </div>
-              </li>';
+        echo '
+        <img src="img/1.jpg" alt="" class="user-pic" onclick="toggleMenu()">
+    <div class="sub-menu-wrap" id="subMenu">
+    <div class="sub-menu">
+        <div class="user-info1">
+            <img src="img/1.jpg" alt="" clas="user-pic">
+            <h2>' . $cookieUser . '</h2>
+        </div>
+        <hr>
+    <a href="#" class="sub-menu-link">
+        <img src="img/help.png" alt="">
+        <p>Help & Support</p>
+        <span>></span>
+    </a>
+    <a href="logoutUser.php" class="sub-menu-link">
+        <img src="img/logout.png" alt="">
+        <p>Logout</p>
+        <span>></span>
+    </a>
+    </div>
+      
+</div>
+</div>';
     }
     ?>
         </ul>
@@ -156,5 +173,13 @@
   </div>
   <script src="./common/common.js"></script>
   <script src="./admin/adminpages.js"></script>
+  <script>
+        let subMenu = document.getElementById("subMenu");
+
+        function toggleMenu() {
+            console.log(subMenu);
+            subMenu.classList.toggle("open-menu");
+        }
+    </script>
 </body>
 </html>

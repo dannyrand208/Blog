@@ -32,11 +32,13 @@ $cookieUser = getCookieUser();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog: Homepage</title>
-    <link rel="stylesheet" href="blog2.css">
+    <link rel="stylesheet" href="blog1.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <!-- Include FontAwesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" />
+
+
 
 </head>
 
@@ -57,12 +59,41 @@ $cookieUser = getCookieUser();
             } else {
                 // User is logged in, display Sign Out and user information.
                 echo '<li class="link-item"><a href="adminpages.php" class="link">Admin</a></li>';
-                echo '<div class="dropdown" id="userDropdown">
-                    <a class="dropbtn">' . $cookieUsßer . ' &#9662;</a>
-                    <div class="dropdown-content" id="dropdownContent">
-                        <a href="logoutUser.php">Logout</a>
-                    </div>
-                </div>';
+                echo '
+                <img src="img/1.jpg" alt="" class="user-pic" onclick="toggleMenu()">
+            <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+                <div class="user-info1">
+                    <img src="img/1.jpg" alt="" clas="user-pic">
+                    <h2>' . $cookieUser . '</h2>
+                </div>
+                <hr>
+
+
+                <a href="#" class="sub-menu-link">
+                <img src="img/profile.png" alt="">
+                <p>Edit Profile</p>
+                <span>></span>
+            </a>
+            <a href="#" class="sub-menu-link">
+                <img src="img/setting.png" alt="">
+                <p>Setting and Privacy</p>
+                <span>></span>
+            </a>
+            <a href="#" class="sub-menu-link">
+                <img src="img/help.png" alt="">
+                <p>Help & Support</p>
+                <span>></span>
+            </a>
+            <a href="logoutUser.php" class="sub-menu-link">
+                <img src="img/logout.png" alt="">
+                <p>Logout</p>
+                <span>></span>
+            </a>
+            </div>
+              
+        </div>
+      </div>';
             }
             ?>
 
@@ -228,7 +259,14 @@ $cookieUser = getCookieUser();
             themeToggleBtn.addEventListener("click", toggleTheme);
         });
     </script>
+ <script>
+        let subMenu = document.getElementById("subMenu");
 
+        function toggleMenu() {
+            console.log(subMenu);
+            subMenu.classList.toggle("open-menu");
+        }
+    </script>
 
 
 </body>

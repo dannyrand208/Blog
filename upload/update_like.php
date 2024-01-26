@@ -7,9 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post_id = $_POST['post_id'];
     $status = $_POST['status'];
     $username = $_POST['user_name'];
-    // kiem tra trong db cai thang nay da like hoac dislike chua? => tim trong db co cai row username = $username va post_id = $post_id
-    // neu da like/dis => update
-    // else insert
+  
+
+    
     $dbh = connectToDatabase();
 
 
@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $statement1->execute();
     $result = $statement1->fetch(PDO::FETCH_ASSOC);
     $action = '';
+    
     
     if ($result === false) {
         $statement2 = $dbh->prepare("INSERT INTO `Likes`(`PostID`, `username`, `rating_action`) VALUES (?,?,?)");
@@ -48,17 +49,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     $response = (object) [
-         "action" => $action,
+         "action" => $action
     ];
     
     $response = json_encode($response);
 
     echo $response;
 
-} else {
-
-       
-
-    
-}
+} 
 ?>

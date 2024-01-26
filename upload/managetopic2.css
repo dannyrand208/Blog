@@ -3,6 +3,7 @@
 
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
+    color: black;
 }
 
 body {
@@ -157,7 +158,7 @@ header {
   
 .admin-wrapper {
     display: flex;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 120px);
   }
   
 .admin-wrapper .left-sidebar {
@@ -186,15 +187,16 @@ header {
 
 table {
     width: 100%;
+    height: 100%;
     border-collapse: collapse;
-    font-size: 1.1rem;
+    font-size: 20px;
   }
   
 th,
   td {
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #d3d3d3;
+    border-bottom: 2px solid #d3d3d3;
   }
 
 
@@ -208,7 +210,124 @@ th,
   .edit {
     color: green;
   }
-
+  
   .delete {
     color: red
   }
+/* 
+  padding: 10px 40px;
+  width: 100%;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  outline: none;
+  color: #444;
+  line-height: 20px;
+  font-size: 20px;
+  font-family: 'poppins', sans-serif; */
+
+  /* Drop down content */
+.user-pic{
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 30px;
+  border: 0.01px solid #000; 
+}
+.sub-menu-wrap {
+  position: absolute;
+  top: 10%;
+  right: 80px;
+  width: 310px;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s, opacity 0.5s, transform 0.5s;
+  margin-right: 20px;
+  opacity: 0;
+  transform: translateY(-20px);
+  background-color: #ffffff; /* Set background color */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  border-radius: 8px; /* Add border-radius for rounded corners */
+}
+
+
+
+.sub-menu-wrap.open-menu {
+  max-height: 400px;
+  opacity: 1; /* Change opacity to 1 when menu is open */
+  transform: translateY(0); /* Move the menu back to its original position */
+}
+
+.user-info1 img {
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: 0.01px solid #000; 
+  
+}
+
+
+.sub-menu {
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+
+}
+
+.user-info1 {
+  display: flex;
+  align-items: center;
+}
+
+.user-info1 h3 {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333; /* Adjust the color to your preference */
+}
+
+.sub-menu hr {
+  border: 0;
+  height: 1px;
+  width: 100%;
+  background: #ccc;
+  margin:15px 0 10px;
+}
+
+.sub-menu-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333; /* Adjust the color to your preference */
+  margin: 12px 0;
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.sub-menu-link p {
+  width: 100%;
+  font-size: 1em;
+  margin: 0; /* Remove default margin for cleaner appearance */
+}
+
+.sub-menu-link img {
+  width: 40px;
+  background: #e5e5e5;
+  border-radius: 50%;
+  padding: 8px;
+  margin-right: 15px;
+}
+.sub-menu-link span {
+  font-size: 18px; /* Adjust the size of the ">" symbol */
+  font-weight: lighter; /* Adjust the font weight to make it thinner */
+  transition: transform 0.5s, color 0.3s; /* Smooth transitions on hover */
+  color: #555; /* Default color for the ">" symbol */
+}
+
+.sub-menu-link:hover span {
+  transform: translateX(5px);
+  color: #007bff; /* Change color on hover */
+}
+
+.sub-menu-link:hover p {
+  color: #007bff; /* Change color on hover */
+}
+
