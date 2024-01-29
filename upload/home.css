@@ -432,3 +432,7 @@ ul{
     color: #007bff; /* Change color on hover */
 }
 
+
+.grid-container {
+    display: inline-grid;
+  }

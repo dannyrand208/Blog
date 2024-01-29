@@ -130,60 +130,69 @@ $themeConfig = getCookieTheme();
 
     <section class="blog-section">
         <p style="text-align:center; font-size: 55px;"> Trending Post</p>
+        <div class="grid-container">
+            <div class="swiper mySwiper">
+                <div class="grid-item1">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img class="blog-image" src="https://i.ytimg.com/vi/KE0hB9kXUVo/maxresdefault.jpg" alt="">
+                            <h1 class="blog-title">AUSTRALIA TRAVEL BLOG | a week in Melbourne & Sydney! 🇦🇺</h1>
+                            <p class="blog-overview">The first vlog in the Australia travel series! 🤩
 
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img class="blog-image" src="https://i.ytimg.com/vi/KE0hB9kXUVo/maxresdefault.jpg" alt="">
-                    <h1 class="blog-title">AUSTRALIA TRAVEL BLOG | a week in Melbourne & Sydney! 🇦🇺</h1>
-                    <p class="blog-overview">The first vlog in the Australia travel series! 🤩
+                                For 7 weeks my boyfriend Sid and I will be travelling up the East Coast of Australia
+                                with
+                                the help of travel agency My Adventure Project! Start building your customised trip with
+                                them here: https://myadventureproject.com/ </p>
+                            <a href="/" class="oke">Read more</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                         <div class="grid-item2">
+                        <img class="blog-image" src="https://i.ytimg.com/vi/LZLKfPXyqRo/maxresdefault.jpg" alt="">
+                        <h1 class="blog-title">AMERICA BLOG🇺🇸Part 1 (Stuck in Phoenix!)</h1>
+                        <p class="blog-overview">What's going on guys!! I'm back with another video, sorry it's been a
+                            while, some of you may know I've been traveling around America! So I thought I'd update you
+                            all on my trip so far and give you my initial thoughts and what we've been getting up too!
+                            I've been here 2 months now and I’ve also got some thoughts about eating healthy (and not)
+                            and I wanted to share them with you!</p>
+                        <a href="/" class="oke">Read more</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="grid-item">
+                        <img class="blog-image" src="https://i.ytimg.com/vi/LZLKfPXyqRo/maxresdefault.jpg" alt="">
+                        <h1 class="blog-title">AMERICA BLOG🇺🇸Part 1 (Stuck in Phoenix!)</h1>
+                        <p class="blog-overview">What's going on guys!! I'm back with another video, sorry it's been a
+                            while, some of you may know I've been traveling around America! So I thought I'd update you
+                            all on my trip so far and give you my initial thoughts and what we've been getting up too!
+                            I've been here 2 months now and I’ve also got some thoughts about eating healthy (and not)
+                            and I wanted to share them with you!</p>
+                        <a href="/" class="oke">Read more</a>
+                    </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="grid-item">
+                        <img class="blog-image" src="https://i.ytimg.com/vi/KE0hB9kXUVo/maxresdefault.jpg" alt="">
+                        <h1 class="blog-title">AUSTRALIA TRAVEL BLOG | a week in Melbourne & Sydney! 🇦🇺</h1>
+                        <p class="blog-overview">The first vlog in the Australia travel series! 🤩
 
-                        For 7 weeks my boyfriend Sid and I will be travelling up the East Coast of Australia with
-                        the help of travel agency My Adventure Project! Start building your customised trip with
-                        them here: https://myadventureproject.com/ </p>
-                    <a href="/" class="oke">Read more</a>
-                </div>
-                <div class="swiper-slide">
-                    <img class="blog-image" src="https://i.ytimg.com/vi/LZLKfPXyqRo/maxresdefault.jpg" alt="">
-                    <h1 class="blog-title">AMERICA BLOG🇺🇸Part 1 (Stuck in Phoenix!)</h1>
-                    <p class="blog-overview">What's going on guys!! I'm back with another video, sorry it's been a
-                        while, some of you may know I've been traveling around America! So I thought I'd update you
-                        all on my trip so far and give you my initial thoughts and what we've been getting up too!
-                        I've been here 2 months now and I’ve also got some thoughts about eating healthy (and not)
-                        and I wanted to share them with you!</p>
-                    <a href="/" class="oke">Read more</a>
-                </div>
-                <div class="swiper-slide">
-                    <img class="blog-image" src="https://i.ytimg.com/vi/LZLKfPXyqRo/maxresdefault.jpg" alt="">
-                    <h1 class="blog-title">AMERICA BLOG🇺🇸Part 1 (Stuck in Phoenix!)</h1>
-                    <p class="blog-overview">What's going on guys!! I'm back with another video, sorry it's been a
-                        while, some of you may know I've been traveling around America! So I thought I'd update you
-                        all on my trip so far and give you my initial thoughts and what we've been getting up too!
-                        I've been here 2 months now and I’ve also got some thoughts about eating healthy (and not)
-                        and I wanted to share them with you!</p>
-                    <a href="/" class="oke">Read more</a>
-                </div>
-                <div class="swiper-slide">
-                    <img class="blog-image" src="https://i.ytimg.com/vi/KE0hB9kXUVo/maxresdefault.jpg" alt="">
-                    <h1 class="blog-title">AUSTRALIA TRAVEL BLOG | a week in Melbourne & Sydney! 🇦🇺</h1>
-                    <p class="blog-overview">The first vlog in the Australia travel series! 🤩
-
-                        For 7 weeks my boyfriend Sid and I will be travelling up the East Coast of Australia with
-                        the help of travel agency My Adventure Project! Start building your customised trip with
-                        them here: https://myadventureproject.com/ </p>
-                    <a href="/" class="oke">Read more</a>
-                </div>
-                <!-- <div class="swiper-slide">Slide 5</div>
+                            For 7 weeks my boyfriend Sid and I will be travelling up the East Coast of Australia with
+                            the help of travel agency My Adventure Project! Start building your customised trip with
+                            them here: https://myadventureproject.com/ </p>
+                        <a href="/" class="oke">Read more</a>
+                    </div>
+                    </div>
+                    <!-- <div class="swiper-slide">Slide 5</div>
                 <div class="swiper-slide">Slide 6</div>
                 <div class="swiper-slide">Slide 7</div>
                 <div class="swiper-slide">Slide 8</div>
                 <div class="swiper-slide">Slide 9</div> -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
         </div>
-
         <!-- Swiper JS -->
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <!-- Initialize Swiper -->

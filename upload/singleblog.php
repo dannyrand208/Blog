@@ -279,7 +279,9 @@ $status = $stmt2->fetch(PDO::FETCH_ASSOC)['rating_action'];
 
 
         //GET LIKE DISCOUNT COMMENT DATABSE
-        $query = "SELECT COUNT(*) AS dislikes FROM Like_comment WHERE CommentID= ? AND PostId = ? AND User_comment = ? AND User_like =? AND rating_action = 'dislike'";
+        $query = "SELECT COUNT(*) AS dislikes 
+        FROM `Like_comment` 
+        WHERE `CommentID` = ? AND `PostId` = ? AND `User_comment` = ? AND `User_like` = ? AND `rating_action` = 'dislike';";
         $stmt = $dbh->prepare($query);
         $stmt->bindValue(1, $row1['CommentID']);
         $stmt->bindValue(2, $data_post_id);
@@ -290,7 +292,19 @@ $status = $stmt2->fetch(PDO::FETCH_ASSOC)['rating_action'];
 
 
 
-
+        //GET STATUS
+        $query = "SELECT rating_action 
+        FROM `Like_comment` 
+        WHERE `CommentID` = ? AND `PostId` = ? AND `User_comment` = ? AND `User_like` = ?;";
+        $stmt = $dbh->prepare($query);
+        $stmt->bindValue(1, $row1['CommentID']);
+        $stmt->bindValue(2, $data_post_id);
+        $stmt->bindValue(3, $row1['User_comment']);
+        $stmt->bindValue(4, $cookieUser);
+        $stmt->execute();
+        $status1 = $stmt->fetch(PDO::FETCH_ASSOC)['rating_action'];
+        $selected1= ' ';
+        $selected2=' ';
         if ($status1 === 'like') {
             $selected1 = 'selected';
         } else if ($status1 === 'dislike') {
@@ -527,7 +541,7 @@ $status = $stmt2->fetch(PDO::FETCH_ASSOC)['rating_action'];
                             $('.dislikes_count').text(`${cnt_dislike + 1} likes`);
 
                             var likebutton = $('.like');
-                           
+
 
                             var dislikebutton = $('.dislike');
                             likebutton.removeClass('selected');
@@ -569,25 +583,25 @@ $status = $stmt2->fetch(PDO::FETCH_ASSOC)['rating_action'];
                 success: function (response) {
                     response = JSON.parse(response);
                     var action = response.action;
-                
+
                     console.log(action);
-            
+
                     if (action === 'insert') {
                         if (status1 == 'like') {
                             var cnt_like = $button.closest('.like-section').find('.likecount').data('count');
                             $button.closest('.like-section').find('.likecount').data('count', cnt_like + 1);
                             $button.closest('.like-section').find('.likecount').text(`${cnt_like + 1} likes`);
 
-                            
+
                             var likebutton = $button;
                             likebutton.addClass('selected');
                         } else if (status1 == 'dislike') {
                             var cnt_dislike = $button.closest('.like-section').find('.dislikecount').data('count');
                             $button.closest('.like-section').find('.dislikecount').data('count', cnt_dislike + 1);
                             $button.closest('.like-section').find('.dislikecount').text(`${cnt_dislike + 1} likes`);
-                            
-    
-                
+
+
+
                             var dislikebutton = $button;
                             dislikebutton.addClass('selected');
                         }
@@ -598,7 +612,7 @@ $status = $stmt2->fetch(PDO::FETCH_ASSOC)['rating_action'];
                             $button.closest('.like-section').find('.likecount').data('count', cnt_like - 1);
                             $button.closest('.like-section').find('.likecount').text(`${cnt_like - 1} likes`);
 
-                            
+
                             var likebutton = $button;
                             likebutton.removeClass('selected');
 
@@ -607,7 +621,7 @@ $status = $stmt2->fetch(PDO::FETCH_ASSOC)['rating_action'];
                             $button.closest('.like-section').find('.dislikecount').data('count', cnt_dislike - 1);
                             $button.closest('.like-section').find('.dislikecount').text(`${cnt_dislike - 1} likes`);
 
-                        
+
                             var dislikebutton = $button;
                             dislikebutton.removeClass('selected');
 

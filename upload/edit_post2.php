@@ -14,6 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/myprogram/upload/img/";
     $target_file = $target_dir . $hinhanhath;
 
+    var_dump( $hinhanhath);
+
 
     if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
         $dbh = connectToDatabase();

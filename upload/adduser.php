@@ -15,7 +15,7 @@ $cookieUser = getCookieUser()
     <title>Blog: Homepage</title>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="adminpages1.css">
+    <link rel="stylesheet" href="adminpages.css">
 </head>
 
 <body>
@@ -86,6 +86,7 @@ $cookieUser = getCookieUser()
             <!-- Left Sidebar -->
             <header>Manage </header>
             <ul>
+                <li> <a href="editprofile.php">Edit Profile</a></li>
                 <li> <a href="managepost.php">Manage Post</a></li>
                 <li> <a href="manageuser.php">Manage Users</a></li>
                 <li> <a href="managetopic.php">Manage Topics</a></li>

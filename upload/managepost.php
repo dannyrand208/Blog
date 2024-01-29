@@ -87,6 +87,7 @@ $cookieUser = getCookieUser()
             <!-- Left Sidebar -->
             <header>Manage </header>
             <ul>
+            <li> <a href="editprofile.php">Edit Profile</a></li>
                 <li> <a href="managepost.php">Manage Post</a></li>
                 <li> <a href="manageuser.php">Manage Users</a></li>
                 <li> <a href="managetopic.php">Manage Topics</a></li>
@@ -181,9 +182,7 @@ $cookieUser = getCookieUser()
 
 
 
-            <div class="admin-content">
-                <div class="button-group"></div>
-            </div>
+        
             <script src="./common/common.js"></script>
             <script src="./admin/adminpages.js"></script>
             <script>

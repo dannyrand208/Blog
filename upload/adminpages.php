@@ -72,6 +72,7 @@
         <!-- Left Sidebar -->
         <header>Manage </header>  
         <ul >
+           <li> <a href="editprofile.php">Edit Profile</a></li>
             <li> <a  href="managepost.php">Manage Post</a></li>
             <li> <a  href="manageuser.php">Manage Users</a></li>
             <li> <a  href="managetopic.php">Manage Topics</a></li>
